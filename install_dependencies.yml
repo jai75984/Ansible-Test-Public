@@ -1,0 +1,38 @@
+---
+- name: Configure Windows VMs with dependencies
+  hosts: windows
+  tasks:
+    - name: Ensure Chocolatey is installed
+      win_chocolatey:
+        name: chocolatey
+        state: present
+
+    - name: Install Python
+      win_chocolatey:
+        name: python
+        state: present
+
+    - name: Install Docker Desktop
+      win_chocolatey:
+        name: docker-desktop
+        state: present
+
+    - name: Install Terraform
+      win_chocolatey:
+        name: terraform
+        state: present
+
+    - name: Install Visual Studio Build Tools
+      win_chocolatey:
+        name: visualstudio2019buildtools
+        state: present
+
+    - name: Install OpenJDK
+      win_chocolatey:
+        name: openjdk
+        state: present
+
+    - name: Reboot the machine (if needed)
+      win_reboot:
+        msg: "Rebooting to complete installations"
+        wait: yes
